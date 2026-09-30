@@ -2628,12 +2628,14 @@ fn collapsed_aggregate_workspace_status_uses_its_status_color() {
 }
 
 #[test]
-fn navigator_workspace_arrows_cross_machine_headings_without_activating_them() {
+fn navigator_workspace_arrows_and_hl_cross_machine_headings_without_activating_them() {
     let (mut state, endpoint_id) = state_with_remote();
     state.open_navigator_overlay();
     for (key, expected_endpoint) in [
-        (KeyCode::Right, endpoint_id),
+        (KeyCode::Right, endpoint_id.clone()),
         (KeyCode::Left, ClientEndpointId::Local),
+        (KeyCode::Char('l'), endpoint_id),
+        (KeyCode::Char('h'), ClientEndpointId::Local),
     ] {
         let outcome = state.handle_raw_events(vec![RawInputEvent::Key(
             crate::input::TerminalKey::new(key, KeyModifiers::empty()),

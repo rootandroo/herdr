@@ -679,8 +679,12 @@ impl ClientShellState {
                 }
                 return;
             }
-            if matches!(code, KeyCode::Left | KeyCode::Right) && modifiers.is_empty() {
-                self.move_navigator_workspace(code == KeyCode::Right);
+            if matches!(
+                code,
+                KeyCode::Left | KeyCode::Right | KeyCode::Char('h') | KeyCode::Char('l')
+            ) && modifiers.is_empty()
+            {
+                self.move_navigator_workspace(code == KeyCode::Right || code == KeyCode::Char('l'));
                 outcome.repaint = true;
                 return;
             }
