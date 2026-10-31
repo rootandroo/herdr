@@ -114,11 +114,11 @@ impl ClientShellState {
                         outcome.repaint = true;
                     }
                     KeyCode::Enter => self.submit_worktree_open(outcome),
-                    KeyCode::Up if !opening => {
+                    KeyCode::Up | KeyCode::Char('k') if !opening && modifiers.is_empty() => {
                         self.move_worktree_open_selection(-1);
                         outcome.repaint = true;
                     }
-                    KeyCode::Down if !opening => {
+                    KeyCode::Down | KeyCode::Char('j') if !opening && modifiers.is_empty() => {
                         self.move_worktree_open_selection(1);
                         outcome.repaint = true;
                     }
